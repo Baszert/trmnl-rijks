@@ -1,0 +1,63 @@
+{%- assign cf = trmnl.plugin_settings.custom_fields_values -%}
+{%- assign loc = trmnl.user.locale | default: 'en' | slice: 0, 2 | downcase -%}
+{%- if loc == 'nl' -%}{%- assign lang = 'nl' -%}{%- assign rk_down = 'Het Rijksmuseum is even niet bereikbaar.' -%}
+{%- else -%}{%- assign lang = 'en' -%}{%- assign rk_down = 'The Rijksmuseum cannot be reached right now.' -%}{%- endif -%}
+{%- assign rk_info = true -%}{%- if cf.show_info == false or cf.show_info == 'false' -%}{%- assign rk_info = false -%}{%- endif -%}
+{%- capture rk_data -%}{"pick":{{ pick | json }},"fit":{{ fit | json }},"lang":"{{ lang }}","orient":"{{ cf.match_orientation }}","cover":{% if cf.image_fit == 'cover' %}true{% else %}false{% endif %}}{%- endcapture -%}
+<style>
+  .rk { position: relative; width: 100%; height: 100%; padding: 0; container-type: size; overflow: hidden; }
+  .rk-art, .rk-down { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .rk-art img { max-width: 100%; max-height: 100%; object-fit: contain !important; }
+  .rk--cover .rk-art img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: cover !important; }
+  .rk-down { text-align: center; padding: 0 10%; }
+  .rk [hidden] { display: none; }
+  .rk-card {
+    position: absolute; right: var(--gap-medium); bottom: var(--gap-medium);
+    display: flex; flex-direction: column; gap: var(--gap-xsmall);
+    max-width: max(28cqw, 200px); padding: var(--gap-small) var(--gap);
+    background: #fff; box-shadow: 0 0 0 1px #000, 3px 3px 0 #000;
+  }
+  :is(.screen--4bit, .screen--8bit, .screen--16bit, [class*="screen--color-"]) .rk-card { box-shadow: 0 1px 2px #0005, 3px 6px 14px #0008; }
+  .rk-card > * { display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rk-card > :empty { display: none; }
+  @container (max-width: 520px) { .rk-card { max-width: 62cqw; } }
+  @container (max-height: 300px) { .rk-tech, .rk-num { display: none; } }
+</style>
+<script>
+(function () {
+  if (window.__rk) return; window.__rk = 1;
+  var up = function (n) { return Math.min(4000, Math.ceil(n / 100) * 100); };
+
+  function draw(root) {
+    if (root.dataset.done) return; root.dataset.done = 1;
+    var D = JSON.parse(root.querySelector('.rk-data').textContent), img = root.querySelector('img'),
+        card = root.querySelector('.rk-card'), b = root.getBoundingClientRect();
+    if (!img || !b.width || !b.height) return;
+
+    var dpr = window.devicePixelRatio || 1, W = b.width * dpr, H = b.height * dpr, w = D.pick, nl = D.lang === 'nl';
+    var off = function (x) { return Math.abs(Math.log(x.r * H / W)); };
+    if (D.orient !== 'false') (D.fit || []).forEach(function (f) { if (off(f) < off(w) - 0.05) w = f; });
+
+    var s = document.querySelector('.screen'), color = s && (/screen--(color-|16bit|8bit)/.test(s.className) ||
+        parseFloat(getComputedStyle(s).getPropertyValue('--color-depth')) >= 12);
+    var size = !D.cover ? [W, H] : w.r > W / H ? [H * w.r, H] : [W, W / w.r];
+    if (D.cover) root.classList.add('rk--cover');
+
+    img.onerror = function () { img.hidden = true; root.querySelector('.rk-down').hidden = false; if (card) card.hidden = true; };
+    img.alt = nl ? w.t : w.te;
+    img.src = 'https://iiif.micr.io/' + w.i + '/full/!' + up(size[0]) + ',' + up(size[1]) + '/0/' + (color ? 'color' : 'gray') + '.jpg';
+    if (!card) return;
+
+    var L = function (k) { return (nl ? w[k] : w[k + 'e']) || ''; }, m = L('m'), d = L('d'), k = L('k'), c = card.children;
+    if (!m || /^(anoniem|anonymous|onbekend|unknown)$/i.test(m)) m = nl ? 'Anoniem' : 'Anonymous';
+    c[0].textContent = m;
+    c[1].textContent = L('t') + (d ? ', ' + d : '');
+    c[2].textContent = k.charAt(0).toUpperCase() + k.slice(1);
+    c[3].textContent = 'Rijksmuseum, ' + w.o;
+    card.hidden = false;
+  }
+
+  var run = function () { document.querySelectorAll('.rk').forEach(draw); };
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', run) : run();
+})();
+</script>

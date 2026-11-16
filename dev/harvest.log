@@ -1,0 +1,103 @@
+
+== painting
+  1000 ids
+  2000 ids
+  3000 ids
+  4000 ids
+4929 ids, 4929 to fetch
+file:///Users/bas/trmnl-rijks/dev/lib.mjs:50
+  const n = (o.notation || []).find((x) => x['@language'] === lang);
+                               ^
+
+TypeError: (o.notation || []).find is not a function
+    at notation (file:///Users/bas/trmnl-rijks/dev/lib.mjs:50:32)
+    at makers (file:///Users/bas/trmnl-rijks/dev/lib.mjs:60:15)
+    at toRow (file:///Users/bas/trmnl-rijks/dev/lib.mjs:110:5)
+    at file:///Users/bas/trmnl-rijks/dev/harvest.mjs:55:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///Users/bas/trmnl-rijks/dev/lib.mjs:32:16
+    at async Promise.all (index 0)
+    at async pool (file:///Users/bas/trmnl-rijks/dev/lib.mjs:29:3)
+    at async file:///Users/bas/trmnl-rijks/dev/harvest.mjs:53:3
+
+Node.js v26.10.0
+
+== painting
+  1000 ids
+  2000 ids
+  3000 ids
+  4000 ids
+4929 ids, 4891 to fetch
+  250/4891
+  500/4891
+  750/4891
+  1000/4891
+  1250/4891
+  1500/4891
+  1750/4891
+  2000/4891
+  2250/4891
+  2500/4891
+  2750/4891
+  3000/4891
+  3250/4891
+  3500/4891
+  3750/4891
+  4000/4891
+  4250/4891
+  4500/4891
+  4750/4891
+painting: 4886 public-domain works with image in cache
+
+== drawing
+3941 ids, 3941 to fetch
+  250/3941
+  500/3941
+  750/3941
+  1000/3941
+  1250/3941
+  1500/3941
+  1750/3941
+  2000/3941
+  2250/3941
+  2500/3941
+  2750/3941
+  3000/3941
+  3250/3941
+  3500/3941
+  3750/3941
+drawing: 3348 public-domain works with image in cache
+
+== print
+5105 ids, 5103 to fetch
+  250/5103
+  500/5103
+  750/5103
+  1000/5103
+  1250/5103
+  1500/5103
+  1750/5103
+  2000/5103
+  2250/5103
+  2500/5103
+  2750/5103
+  3000/5103
+  3250/5103
+  3500/5103
+  3750/5103
+  4000/5103
+  4250/5103
+  4500/5103
+  4750/5103
+  5000/5103
+print: 4516 public-domain works with image in cache
+
+== photograph
+1515 ids, 1511 to fetch
+  250/1511
+  500/1511
+  750/1511
+  1000/1511
+  1250/1511
+  1500/1511
+photograph: 1020 public-domain works with image in cache

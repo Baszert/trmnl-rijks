@@ -1,0 +1,70 @@
+---
+strategy: polling
+no_screen_padding: 'yes'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+framework_version: 3.4.4
+serverless_language:
+refresh_interval_floor: ''
+polling_url: 'https://trmnl.achtnegen.nl/rijks/art.php?type={{ type | default: "painting" }}&period={{ period | default: "all" }}&top={{ masterpieces }}'
+polling_headers: ''
+polling_body: ''
+id: 542544
+oauth_enabled: 'false'
+oauth_pkce_enabled: 'no'
+custom_fields:
+- keyname: about
+  field_type: author_bio
+  name: About This Plugin
+  category: art,education
+  description: 'The Rijksmuseum in Amsterdam is the national museum of the Netherlands: eight centuries of Dutch art, from Rembrandt''s Night Watch and Vermeer''s Milkmaid to Van Gogh''s self-portrait.<br><br>Now it hangs on your wall. Every refresh brings a new work from more than 13,000 paintings, drawings, prints and early photographs, with a small museum label telling you who made it and when.<br><br>Images: <a href="https://www.rijksmuseum.nl">Rijksmuseum</a>, public domain.'
+  email_address: trmnl@achtnegen.nl
+- keyname: type
+  field_type: select
+  name: Type of work
+  options:
+  - Paintings: painting
+  - Drawings: drawing
+  - Prints: print
+  - Photographs: photograph
+  - Everything: all
+  default: painting
+- keyname: masterpieces
+  field_type: boolean
+  name: Masterpieces only
+  description: Only the roughly 200 best-known works, such as The Night Watch and The Milkmaid.
+  default: false
+- keyname: period
+  field_type: select
+  name: Period
+  options:
+  - Any period: all
+  - Before 1500: pre1500
+  - 16th century: '1500'
+  - 17th century (Golden Age): '1600'
+  - 18th century: '1700'
+  - 19th century: '1800'
+  - 20th century: '1900'
+  default: all
+- keyname: match_orientation
+  field_type: boolean
+  name: Match screen shape
+  description: Prefer works whose shape fits the screen or mashup slot, so they fill it.
+  default: true
+- keyname: image_fit
+  field_type: select
+  name: Fit
+  description: Contain shows the whole work. Cover fills the screen and crops the edges.
+  options:
+  - Contain (whole work): contain
+  - Cover (fill the screen): cover
+  default: contain
+- keyname: show_info
+  field_type: boolean
+  name: Show museum label
+  description: A small label in the corner with the artist, title, year and technique.
+  default: true
+name: Rijksmuseum
+description: Dutch masters on your screen
+refresh_interval: 60

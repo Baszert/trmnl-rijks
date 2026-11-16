@@ -1,0 +1,20 @@
+# TRMNLP configuration
+---
+watch:
+  - .trmnlp.yml
+  - src
+
+custom_fields:
+  type: painting
+  period: all
+  masterpieces: false
+  match_orientation: true
+  show_info: true
+
+variables:
+  trmnl:
+    user:
+      locale: nl
+      utc_offset: 3600
+    plugin_settings:
+      instance_name: Rijksmuseum

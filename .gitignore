@@ -1,0 +1,5 @@
+dev/node_modules/
+dev/out/
+.DS_Store
+rijks-server.zip
+dev/cache/

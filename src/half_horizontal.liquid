@@ -1,0 +1,15 @@
+<div class="layout rk">
+  <script type="application/json" class="rk-data">{{ rk_data }}</script>
+  {%- if pick %}
+  <div class="rk-art"><img class="image image-dither" alt=""></div>
+  {%- if rk_info %}
+  <div class="rk-card" hidden>
+    <span class="title title--small"></span>
+    <span class="label label--small"></span>
+    <span class="rk-tech label label--small"></span>
+    <span class="rk-num label label--small label--gray"></span>
+  </div>
+  {%- endif %}
+  {%- endif %}
+  <div class="rk-down"{% if pick %} hidden{% endif %}><span class="title">{{ rk_down }}</span></div>
+</div>
