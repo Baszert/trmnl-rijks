@@ -38,7 +38,7 @@
     var off = function (x) { return Math.abs(Math.log(x.r * H / W)); };
     if (D.orient !== 'false') (D.fit || []).forEach(function (f) { if (off(f) < off(w) - 0.05) w = f; });
 
-    var s = document.querySelector('.screen'), color = s && (/screen--(color-|16bit|8bit)/.test(s.className) ||
+    var s = document.querySelector('.screen'), color = s && (/screen--(color-|16bit|8bit|frame)/.test(s.className) ||
         parseFloat(getComputedStyle(s).getPropertyValue('--color-depth')) >= 12);
     var size = !D.cover ? [W, H] : w.r > W / H ? [H * w.r, H] : [W, W / w.r];
     if (D.cover) root.classList.add('rk--cover');

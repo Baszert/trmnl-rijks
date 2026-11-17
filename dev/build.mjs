@@ -28,8 +28,8 @@ const DEV = {
   og: ['screen--og screen--1bit screen--md screen--no-bleed', 800, 480],
   x: ['screen--v2 screen--4bit screen--lg screen--no-bleed', 1872, 1404],
   xp: ['screen--v2 screen--4bit screen--lg screen--portrait screen--no-bleed', 1404, 1872],
-  frame: ['screen--frame screen--1bit screen--lg screen--no-bleed', 2560, 1440],
-  framec: ['screen--frame screen--color-6a screen--lg screen--no-bleed', 2560, 1440],
+  frame: ['screen--frame screen--1bit screen--md screen--no-bleed', 2560, 1440],
+  framec: ['screen--frame screen--color-6a screen--md screen--no-bleed', 2560, 1440],
 };
 const MASH = { half_horizontal: ['mashup--1Tx1B', 2], half_vertical: ['mashup--1Lx1R', 2], quadrant: ['mashup--2x2', 4] };
 const C = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
